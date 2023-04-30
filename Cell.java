@@ -1,15 +1,15 @@
 public class Cell {
-    private int x;
-    private int y;
-    public boolean state;
-    public Game game;
-    public Cell(int x, int y, Game game) {
+    private int x; // X position
+    private int y; // Y position
+    public boolean state; // State of the cell (true = alive, false = dead)
+    public Game game; // Reference to the game object
+    public Cell(int x, int y, Game game) { // Constructor
         this.x = x;
         this.y = y;
-        this.state = false;
+        this.state = false; // Default state is dead
         this.game = game;
     }
-    public void update() {
+    public void update() { // Update the cell
         /*
          * 1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
          * 2. Any live cell with two or three live neighbours lives on to the next generation.
@@ -37,10 +37,10 @@ public class Cell {
             if(count == 3) state = true; // Cell reproduction (case 4)
         }
     }
-    public char render(){
-        if(state) {
+    public char render(){ // Render the cell
+        if(state) { // Cell is alive
             return "■";
-        } else {
+        } else { // Cell is dead
             return "□";
         }
     }

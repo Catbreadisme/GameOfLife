@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7b7b96-0e21-4ffd-9995-578d6bfb8bd5" name="Changes" comment="Added cell array and started cell class">
+    <list default="true" id="8e7b7b96-0e21-4ffd-9995-578d6bfb8bd5" name="Changes" comment="Added cell updating and rendering">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Game.java" afterDir="false" />
@@ -58,7 +58,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682558364372</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added cell updating and rendering">
+      <created>1682631514424</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682631514424</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -66,7 +73,14 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="73" />
+                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="39" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -74,6 +88,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added cell array and started cell class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added cell array and started cell class" />
+    <MESSAGE value="Added cell updating and rendering" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added cell updating and rendering" />
   </component>
 </project>
