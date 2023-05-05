@@ -28,14 +28,16 @@ public class Game {
         }
         newTurn(); // Start first turn
     }
-    private static void newTurn() {
+    private static void newTurn() { // Effectively the main loop
         render(); // Render grid
         System.out.println("Enter the x coordinate of a cell you would like to toggle, or enter 'next <no. of turns>' to evaluate turns.");
         String input = kb.nextLine(); // Get the user's input
         int x = 0;
+        int y;
         int turns;
         try { // Try to parse the input as an integer
             x = Integer.parseInt(input);
+            if(x > WIDTH || x < 1) System.out.println("Coordinate must be within 1-"+WIDTH);
         } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
             String word = input.split(" ")[0]; // Split the input into words
             if (word.equalsIgnoreCase("next")) {
@@ -52,7 +54,8 @@ public class Game {
             }
         }
         System.out.println("Now enter the y coordinate of the cell to toggle.");
-        int y = kb.nextInt(); // Get the user's input
+        y = kb.nextInt(); // Get the user's input
+        if (y > HEIGHT || y < 1) System.out.println("Coordinate must be within 1-"+HEIGHT);
         x--;
         y--;
         cells[y][x].state = !cells[y][x].state; // Toggle the cell's state
