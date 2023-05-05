@@ -1,10 +1,10 @@
+package main.java;
 /*
  * Conway's Game of Life
  * by Luka Scott started on 27/04/2023
  * https://www.github.com/SkySourced/GameOfLife
  */
 
-import java.util.Timer;
 import java.util.Scanner;
 
 public class Game {
@@ -12,11 +12,11 @@ public class Game {
     public static final int WIDTH = 50; // Width of the grid
     public static final int HEIGHT = 50; // Height of the grid
     // Public variables
-    public Cell[][] cells; // 2D array of cells
+    public static Cell[][] cells; // 2D array of cells
     // Private variables
-    private int rate; // Rate of updates per second
+    //private int rate; // Rate of updates per second
     // Library implementations
-    private static Keyboard kb; // Keyboard input
+    private static Scanner kb; // Keyboard input
 
     // Main
     public static void main(String[] args) {
@@ -25,8 +25,8 @@ public class Game {
     }
 
     // Initialises the grid
-    private static void gridInit() {
-        this.cells = new Cell[WIDTH][HEIGHT]; // Initialise the 2D array
+    private void gridInit() {
+        cells = new Cell[WIDTH][HEIGHT]; // Initialise the 2D array
         for (int i = 0; i < WIDTH; i++) { // For each row
             for (int j = 0; j < HEIGHT; j++) { // For each column
                 cells[i][j] = new Cell(i, j, this); // Create a new cell
@@ -39,15 +39,17 @@ public class Game {
         System.out.println("Enter the x coordinate of a cell you would like to toggle, or enter 'next <no. of turns>' to evaluate turns.");
         String input = kb.nextLine(); // Get the user's input
         int x;
+        int turns;
         try { // Try to parse the input as an integer
-            Integer.parseInt(input);
-        } catch { // If it fails, check if the input is "next"
-            word = input.split(" ")[0]; // Split the input into words
-            if (word.toLowerCase() == "next") {
+            x = Integer.parseInt(input);
+        } catch (NumberFormatException e) { // If it fails, check if the input is "next"
+            String word = input.split(" ")[0]; // Split the input into words
+            if (word.equalsIgnoreCase("next")) {
                 try {
-                    int turns = Integer.parseInt(input.split(" ")[1]); // Get the number of turns
-                } catch { // No specified turn number, run one turn
+                    turns = Integer.parseInt(input.split(" ")[1]); // Get the number of turns
+                } catch (NumberFormatException e2) { // No specified turn number, run one turn
                     runTurns(1);
+                    throw e;
                 }
                 runTurns(turns); // Run the turns
             } else { // If it's not "next", then the input is invalid
