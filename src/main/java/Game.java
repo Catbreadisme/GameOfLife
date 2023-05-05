@@ -9,47 +9,41 @@ import java.util.Scanner;
 
 public class Game {
     // Constants
-    public static final int WIDTH = 50; // Width of the grid
-    public static final int HEIGHT = 50; // Height of the grid
+    public static final int WIDTH = 10; // Width of the grid
+    public static final int HEIGHT = 10; // Height of the grid
     // Public variables
     public static Cell[][] cells; // 2D array of cells
     // Private variables
     //private int rate; // Rate of updates per second
     // Library implementations
-    private static Scanner kb; // Keyboard input
-
-    // Main
-    public static void main(String[] args) {
-        kb = new Scanner(System.in);
-        gridInit();
-    }
+    public static Scanner kb; // Keyboard input
 
     // Initialises the grid
-    private void gridInit() {
-        cells = new Cell[WIDTH][HEIGHT]; // Initialise the 2D array
-        for (int i = 0; i < WIDTH; i++) { // For each row
-            for (int j = 0; j < HEIGHT; j++) { // For each column
+    public void gridInit() {
+        cells = new Cell[HEIGHT][WIDTH]; // Initialise the 2D array
+        for (int i = 0; i < HEIGHT; i++) { // For each row
+            for (int j = 0; j < WIDTH; j++) { // For each column
                 cells[i][j] = new Cell(i, j, this); // Create a new cell
             }
         }
-        render(); // Render the grid
-        newTurn();
+        newTurn(); // Start first turn
     }
     private static void newTurn() {
+        render(); // Render grid
         System.out.println("Enter the x coordinate of a cell you would like to toggle, or enter 'next <no. of turns>' to evaluate turns.");
         String input = kb.nextLine(); // Get the user's input
-        int x;
+        int x = 0;
         int turns;
         try { // Try to parse the input as an integer
             x = Integer.parseInt(input);
-        } catch (NumberFormatException e) { // If it fails, check if the input is "next"
+        } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
             String word = input.split(" ")[0]; // Split the input into words
             if (word.equalsIgnoreCase("next")) {
                 try {
                     turns = Integer.parseInt(input.split(" ")[1]); // Get the number of turns
-                } catch (NumberFormatException e2) { // No specified turn number, run one turn
+                } catch (ArrayIndexOutOfBoundsException oob) { // No specified turn number, run one turn
                     runTurns(1);
-                    throw e;
+                    throw oob;
                 }
                 runTurns(turns); // Run the turns
             } else { // If it's not "next", then the input is invalid
@@ -59,13 +53,16 @@ public class Game {
         }
         System.out.println("Now enter the y coordinate of the cell to toggle.");
         int y = kb.nextInt(); // Get the user's input
-        cells[x][y].state = !cells[x][y].state; // Toggle the cell's state
+        x--;
+        y--;
+        cells[y][x].state = !cells[y][x].state; // Toggle the cell's state
         newTurn(); // Start a new turn
     }
     public static void runTurns(int turns){
         for(int i = 0; i < turns; i++){
             update();
             render();
+            if(i+1 < turns) System.out.println("----------"); // buffer between multiple turns
         }
         newTurn();
     }
