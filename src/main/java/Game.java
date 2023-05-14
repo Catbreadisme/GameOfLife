@@ -29,7 +29,50 @@ public class Game {
         newTurn(); // Start first turn
     }
     private static void newTurn() { // Effectively the main loop
-        render(); // Render grid
+        render(); // Render the grid
+        System.out.println("Enter the x coordinate of a cell you would like to toggle, or enter 'next <no. of turns>' to evaluate turns.");
+        String[] input = kb.nextLine().split(" "); // Get the user's input
+        int x = 0;
+        int y = 0;
+        int turns;
+
+        if(input[0].equalsIgnoreCase("next")) {
+            try {
+                turns = Integer.parseInt(input[1]); // Get the number of turns
+            } catch (ArrayIndexOutOfBoundsException oob) { // No specified turn number, run one turn
+                turns = 1;
+            }
+            runTurns(turns); // Run the turns
+        } else {
+            try { // Try to parse the input as an integer
+                x = Integer.parseInt(input[0]);
+                if (x > WIDTH || x < 1) {
+                    System.out.println("Coordinate must be within 1-" + WIDTH);
+                    newTurn(); // Check if the input is within the grid
+                }
+            } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
+                System.out.println("Invalid input. Please enter a number or 'next'.");
+                newTurn(); // Start a new turn
+            }
+            System.out.println("Now enter the y coordinate of the cell to toggle.");
+            input = kb.nextLine().split(" "); // Get the user's input
+            try {
+                y = Integer.parseInt(input[0]);
+                if (y > HEIGHT || y < 1) {
+                    System.out.println("Coordinate must be within 1-" + HEIGHT);
+                    newTurn(); // Check if the input is within the grid
+                }
+            } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
+                System.out.println("Invalid input. Please enter a number or 'next'.");
+                newTurn(); // Start a new turn
+            }
+            x--; // Convert the coordinates to array indices
+            y--;
+            cells[y][x].state = !cells[y][x].state; // Toggle the cell's state
+            newTurn(); // Start a new turn
+        }
+    }
+    /*private static void newTurn() { // Effectively the main loop
         System.out.println("Enter the x coordinate of a cell you would like to toggle, or enter 'next <no. of turns>' to evaluate turns.");
         String input = kb.nextLine(); // Get the user's input
         int x = 0;
@@ -60,12 +103,14 @@ public class Game {
         y--;
         cells[y][x].state = !cells[y][x].state; // Toggle the cell's state
         newTurn(); // Start a new turn
-    }
+    }*/
     public static void runTurns(int turns){
         for(int i = 0; i < turns; i++){
             update();
-            render();
-            if(i+1 < turns) System.out.println("----------"); // buffer between multiple turns
+            if(i+1 < turns) {
+                render();
+                System.out.println("----------"); // buffer between multiple turns
+            }
         }
         newTurn();
     }
