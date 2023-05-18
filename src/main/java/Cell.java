@@ -1,17 +1,28 @@
 package main.java;
+/*
+  Conway's Game of Life
+  by Luka Scott started on 27/04/2023
+  https://www.github.com/SkySourced/GameOfLife
 
-import static main.java.Game.cells;
+  This class represents an individual cell.
+ */
+
+import static main.java.Game.*;
 
 public class Cell {
-    private final int x; // X position
-    private final int y; // Y position
+    private final int X; // X position
+    private final int Y; // Y position
     public boolean state; // State of the cell (true = alive, false = dead)
+    public boolean newState; // State of the cell in the next turn
     public Game game; // Reference to the game object
+    private String debug; // Debug string
+
     public Cell(int x, int y, Game game) { // Constructor
-        this.x = x;
-        this.y = y;
+        this.X = x;
+        this.Y = y;
         this.state = false; // Default state is dead
         this.game = game;
+        debug = x + "," + y;
     }
     public void update() { // Update the cell
         /*
@@ -22,27 +33,55 @@ public class Cell {
          */
         int count = 0; // Number of live neighbors
 
-        if(x > 0 && y > 0 && cells[x-1][y-1].state) count++;System.out.println("tl: " + count); // top left
-        if(x > 0 && cells[x-1][y].state) count++;System.out.println("l: " + count); // left
-        if(x > 0 && y < Game.HEIGHT-1 && cells[x-1][y+1].state) count++;System.out.println("bl: " + count); // bottom left
-        if(y > 0 && cells[x][y-1].state) count++;System.out.println("t: " + count); // top
-        if(y < Game.HEIGHT-1 && cells[x][y+1].state) count++;System.out.println("b: " + count); // bottom
-        if(x < Game.WIDTH-1 && y > 0 && cells[x+1][y-1].state) count++;System.out.println("tr: " + count); // top right
-        if(x < Game.WIDTH-1 && cells[x+1][y].state) count++;System.out.println("r: " + count); // right
-        if(x < Game.WIDTH-1 && y < Game.HEIGHT-1 && cells[x+1][y+1].state) count++;System.out.println("br: " + count); // bottom right
+        if(X > 0 && Y > 0 && cells[X -1][Y -1].state){
+            count++;
+            debug += " tl "; // top left
+        }
+        if(X > 0 && cells[X -1][Y].state) {
+            count++;
+            debug += " l "; // left
+        }
+        if(X > 0 && Y < Game.HEIGHT-1 && cells[X -1][Y +1].state) {
+            count++;
+            debug += " bl "; // bottom left
+        } // bottom left
+        if(Y > 0 && cells[X][Y -1].state) {
+            count++;
+            debug += " t "; // top
+        }// top
+        if(Y < Game.HEIGHT-1 && cells[X][Y +1].state) {
+            count++;
+            debug += " b "; // bottom
+        } // bottom
+        if(X < Game.WIDTH-1 && Y > 0 && cells[X +1][Y -1].state) {
+            count++;
+            debug += " tr "; // top right
+        } // top right
+        if(X < Game.WIDTH-1 && cells[X +1][Y].state) {
+            count++;
+            debug += " r "; // right
+        } // right
+        if(X < Game.WIDTH-1 && Y < Game.HEIGHT-1 && cells[X +1][Y +1].state) {
+            count++;
+            debug += " br "; // bottom right
+        } // bottom right
 
         if(state) { // Cell is alive
             if (count < 2 || count > 3) { // Cell death (case 1 and 3)
-                state = false;
+                newState = false;
+                debug += " dies";
             }   // If cell survives, no need to change state (case 2)
         } else { // Cell is dead
-            if(count == 3) state = true; // Cell reproduction (case 4)
+            if(count == 3) newState = true; // Cell reproduction (case 4)
         }
+        System.out.println(debug);
     }
     public char render(){ // Render the cell
         if(state) { // Cell is alive
+            // Character to represent a live cell
             return '■';
         } else { // Cell is dead
+            // Character to represent a dead cell
             return '□';
         }
     }

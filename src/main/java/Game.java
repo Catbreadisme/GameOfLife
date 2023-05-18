@@ -1,8 +1,10 @@
 package main.java;
 /*
- * Conway's Game of Life
- * by Luka Scott started on 27/04/2023
- * https://www.github.com/SkySourced/GameOfLife
+  Conway's Game of Life
+  by Luka Scott started on 27/04/2023
+  https://www.github.com/SkySourced/GameOfLife
+
+  This class handles all game events and displays the full grid.
  */
 
 import java.util.Scanner;
@@ -32,11 +34,11 @@ public class Game {
         render(); // Render the grid
         System.out.println("Enter the x coordinate of a cell you would like to toggle, or enter 'next <no. of turns>' to evaluate turns.");
         String[] input = kb.nextLine().split(" "); // Get the user's input
-        int x = 0;
-        int y = 0;
-        int turns;
+        int x = 0; // X coordinate
+        int y = 0; // Y coordinate
+        int turns; // Number of turns to run
 
-        if(input[0].equalsIgnoreCase("next")) {
+        if(input[0].equalsIgnoreCase("next")) { // If the user enters 'next'
             try {
                 turns = Integer.parseInt(input[1]); // Get the number of turns
             } catch (ArrayIndexOutOfBoundsException oob) { // No specified turn number, run one turn
@@ -46,9 +48,9 @@ public class Game {
         } else {
             try { // Try to parse the input as an integer
                 x = Integer.parseInt(input[0]);
-                if (x > WIDTH || x < 1) {
+                if (x > WIDTH || x < 1) { // Check if the input is within the grid
                     System.out.println("Coordinate must be within 1-" + WIDTH);
-                    newTurn(); // Check if the input is within the grid
+                    newTurn(); // Start a new turn
                 }
             } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
                 System.out.println("Invalid input. Please enter a number or 'next'.");
@@ -72,38 +74,6 @@ public class Game {
             newTurn(); // Start a new turn
         }
     }
-    /*private static void newTurn() { // Effectively the main loop
-        System.out.println("Enter the x coordinate of a cell you would like to toggle, or enter 'next <no. of turns>' to evaluate turns.");
-        String input = kb.nextLine(); // Get the user's input
-        int x = 0;
-        int y;
-        int turns;
-        try { // Try to parse the input as an integer
-            x = Integer.parseInt(input);
-            if(x > WIDTH || x < 1) System.out.println("Coordinate must be within 1-"+WIDTH);
-        } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
-            String word = input.split(" ")[0]; // Split the input into words
-            if (word.equalsIgnoreCase("next")) {
-                try {
-                    turns = Integer.parseInt(input.split(" ")[1]); // Get the number of turns
-                } catch (ArrayIndexOutOfBoundsException oob) { // No specified turn number, run one turn
-                    runTurns(1);
-                    throw oob;
-                }
-                runTurns(turns); // Run the turns
-            } else { // If it's not "next", then the input is invalid
-                System.out.println("Invalid input. Please enter a number or 'next'.");
-                newTurn(); // Start a new turn
-            }
-        }
-        System.out.println("Now enter the y coordinate of the cell to toggle.");
-        y = kb.nextInt(); // Get the user's input
-        if (y > HEIGHT || y < 1) System.out.println("Coordinate must be within 1-"+HEIGHT);
-        x--;
-        y--;
-        cells[y][x].state = !cells[y][x].state; // Toggle the cell's state
-        newTurn(); // Start a new turn
-    }*/
     public static void runTurns(int turns){
         for(int i = 0; i < turns; i++){
             update();
@@ -119,6 +89,7 @@ public class Game {
         for (Cell[] row : cells) { // For each row
             for (Cell cell : row) { // For each column
                 cell.update(); // Update the cell
+                cell.state = cell.newState; // Update the cell's state
             }
         }
     }
@@ -126,7 +97,7 @@ public class Game {
     public static void render() {
         for (Cell[] row : cells) { // For each row
             for (Cell cell : row) { // For each column
-                System.out.print(cell.render()); // Print the rendered cell
+                System.out.print(cell.render() + " "); // Print the rendered cell
             }
             System.out.println(); // Print a new line after each row is complete
         }
