@@ -1,12 +1,14 @@
-package main.java;
 /**
- * Conway's Game of Life
- * by Luka Scott started on 27/04/2023
- * <a href="https://www.github.com/SkySourced/GameOfLife">...</a>
+ * @title Conway's Game of Life
+ * @author Luka Scott
+ * @started 27/04/2023
+ * @repository <a href="https://www.github.com/SkySourced/GameOfLife">Github repo</a>
  *
  * Simulates Conway's Game of Life in console
  * This class starts the program
  */
+
+package main.java;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,11 +1,14 @@
-package main.java;
-/*
-  Conway's Game of Life
-  by Luka Scott started on 27/04/2023
-  https://www.github.com/SkySourced/GameOfLife
-
-  This class represents an individual cell.
+/**
+ * @title Conway's Game of Life
+ * @author Luka Scott
+ * @version 1.0
+ * @started 27/04/2023
+ * @repository <a href="https://www.github.com/SkySourced/GameOfLife">Github repo</a>
+ *
+ * This class represents an individual cell.
  */
+
+package main.java;
 
 import static main.java.Game.*;
 
