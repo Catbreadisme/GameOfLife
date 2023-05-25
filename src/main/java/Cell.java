@@ -38,35 +38,35 @@ public class Cell {
 
         if(Y > 0 && X > 0 && cells[Y -1][X -1].state){
             count++;
-            debug += " tl "; // top left
+            debug += " br "; // top left
         }
         if(Y > 0 && cells[Y -1][X].state) {
             count++;
-            debug += " l "; // left
+            debug += " r "; // left
         }
         if(Y > 0 && X < Game.HEIGHT-1 && cells[Y -1][X +1].state) {
             count++;
-            debug += " bl "; // bottom left
+            debug += " tr "; // bottom left
         } // bottom left
         if(X > 0 && cells[Y][X -1].state) {
             count++;
-            debug += " t "; // top
+            debug += " b "; // top
         }// top
         if(X < Game.HEIGHT-1 && cells[Y][X +1].state) {
             count++;
-            debug += " b "; // bottom
+            debug += " r "; // right
         } // bottom
         if(Y < Game.WIDTH-1 && X > 0 && cells[Y +1][X -1].state) {
             count++;
-            debug += " tr "; // top right
+            debug += " bl "; // bottom left
         } // top right
         if(Y < Game.WIDTH-1 && cells[Y +1][X].state) {
             count++;
-            debug += " r "; // right
+            debug += " l "; // right
         } // right
         if(Y < Game.WIDTH-1 && X < Game.HEIGHT-1 && cells[Y +1][X +1].state) {
             count++;
-            debug += " br "; // bottom right
+            debug += " tl "; // bottom right
         } // bottom right
 
         if(state) { // Cell is alive
