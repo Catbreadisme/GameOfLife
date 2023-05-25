@@ -36,35 +36,35 @@ public class Cell {
          */
         int count = 0; // Number of live neighbors
 
-        if(X > 0 && Y > 0 && cells[X -1][Y -1].state){
+        if(Y > 0 && X > 0 && cells[Y -1][X -1].state){
             count++;
             debug += " tl "; // top left
         }
-        if(X > 0 && cells[X -1][Y].state) {
+        if(Y > 0 && cells[Y -1][X].state) {
             count++;
             debug += " l "; // left
         }
-        if(X > 0 && Y < Game.HEIGHT-1 && cells[X -1][Y +1].state) {
+        if(Y > 0 && X < Game.HEIGHT-1 && cells[Y -1][X +1].state) {
             count++;
             debug += " bl "; // bottom left
         } // bottom left
-        if(Y > 0 && cells[X][Y -1].state) {
+        if(X > 0 && cells[Y][X -1].state) {
             count++;
             debug += " t "; // top
         }// top
-        if(Y < Game.HEIGHT-1 && cells[X][Y +1].state) {
+        if(X < Game.HEIGHT-1 && cells[Y][X +1].state) {
             count++;
             debug += " b "; // bottom
         } // bottom
-        if(X < Game.WIDTH-1 && Y > 0 && cells[X +1][Y -1].state) {
+        if(Y < Game.WIDTH-1 && X > 0 && cells[Y +1][X -1].state) {
             count++;
             debug += " tr "; // top right
         } // top right
-        if(X < Game.WIDTH-1 && cells[X +1][Y].state) {
+        if(Y < Game.WIDTH-1 && cells[Y +1][X].state) {
             count++;
             debug += " r "; // right
         } // right
-        if(X < Game.WIDTH-1 && Y < Game.HEIGHT-1 && cells[X +1][Y +1].state) {
+        if(Y < Game.WIDTH-1 && X < Game.HEIGHT-1 && cells[Y +1][X +1].state) {
             count++;
             debug += " br "; // bottom right
         } // bottom right
@@ -72,7 +72,7 @@ public class Cell {
         if(state) { // Cell is alive
             if (count < 2 || count > 3) { // Cell death (case 1 and 3)
                 newState = false;
-                debug += " dies";
+                debug += "dies";
             }   // If cell survives, no need to change state (case 2)
         } else { // Cell is dead
             if(count == 3) newState = true; // Cell reproduction (case 4)
