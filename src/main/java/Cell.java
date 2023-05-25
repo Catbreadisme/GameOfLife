@@ -36,38 +36,7 @@ public class Cell {
          */
         int count = 0; // Number of live neighbors
 
-        if(Y > 0 && X > 0 && cells[Y -1][X -1].state){
-            count++;
-            debug += " br "; // top left
-        }
-        if(Y > 0 && cells[Y -1][X].state) {
-            count++;
-            debug += " r "; // left
-        }
-        if(Y > 0 && X < Game.HEIGHT-1 && cells[Y -1][X +1].state) {
-            count++;
-            debug += " tr "; // bottom left
-        } // bottom left
-        if(X > 0 && cells[Y][X -1].state) {
-            count++;
-            debug += " b "; // top
-        }// top
-        if(X < Game.HEIGHT-1 && cells[Y][X +1].state) {
-            count++;
-            debug += " r "; // right
-        } // bottom
-        if(Y < Game.WIDTH-1 && X > 0 && cells[Y +1][X -1].state) {
-            count++;
-            debug += " bl "; // bottom left
-        } // top right
-        if(Y < Game.WIDTH-1 && cells[Y +1][X].state) {
-            count++;
-            debug += " l "; // right
-        } // right
-        if(Y < Game.WIDTH-1 && X < Game.HEIGHT-1 && cells[Y +1][X +1].state) {
-            count++;
-            debug += " tl "; // bottom right
-        } // bottom right
+        if(cells[Y][X].state) System.out.println(Y + " " + X);
 
         if(state) { // Cell is alive
             if (count < 2 || count > 3) { // Cell death (case 1 and 3)
@@ -77,7 +46,7 @@ public class Cell {
         } else { // Cell is dead
             if(count == 3) newState = true; // Cell reproduction (case 4)
         }
-        System.out.println(debug);
+        //System.out.println(debug);
     }
     public char render(){ // Render the cell
         if(state) { // Cell is alive
