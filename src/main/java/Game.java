@@ -14,8 +14,7 @@ import java.util.Scanner;
 
 public class Game {
     // Constants
-    public static final int WIDTH = 10; // Width of the grid
-    public static final int HEIGHT = 10; // Height of the grid
+    public static final int GRID_SIZE = 10; // Size of the grid
     // Public variables
     public static Cell[][] cells; // 2D array of cells
     // Private variables
@@ -25,9 +24,9 @@ public class Game {
 
     // Initialises the grid
     public void gridInit() {
-        cells = new Cell[HEIGHT][WIDTH]; // Initialise the 2D array
-        for (int i = 0; i < HEIGHT; i++) { // For each row
-            for (int j = 0; j < WIDTH; j++) { // For each column
+        cells = new Cell[GRID_SIZE][GRID_SIZE]; // Initialise the 2D array
+        for (int i = 0; i < GRID_SIZE; i++) { // For each row
+            for (int j = 0; j < GRID_SIZE; j++) { // For each column
                 cells[i][j] = new Cell(i, j, this); // Create a new cell
             }
         }
@@ -44,39 +43,40 @@ public class Game {
         if(input[0].equalsIgnoreCase("next")) { // If the user enters 'next'
             try {
                 turns = Integer.parseInt(input[1]); // Get the number of turns
+            } catch (NumberFormatException notInt) { // If not an int, ask again
+                System.out.println("Invalid input. Please enter a number or 'next (optional number of turns)'.");
+                turns = 0;
+                newTurn(); // Start a new turn
             } catch (ArrayIndexOutOfBoundsException oob) { // No specified turn number, run one turn
                 turns = 1;
             }
             runTurns(turns); // Run the turns
         } else {
-            try { // Try to parse the input as an integer
-                x = Integer.parseInt(input[0]);
-                if (x > WIDTH || x < 1) { // Check if the input is within the grid
-                    System.out.println("Coordinate must be within 1-" + WIDTH);
-                    newTurn(); // Start a new turn
-                }
-            } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
-                System.out.println("Invalid input. Please enter a number or 'next'.");
-                newTurn(); // Start a new turn
-            }
+            x = parseInt(input, x);
             System.out.println("Now enter the y coordinate of the cell to toggle.");
             input = kb.nextLine().split(" "); // Get the user's input
-            try {
-                y = Integer.parseInt(input[0]);
-                if (y > HEIGHT || y < 1) {
-                    System.out.println("Coordinate must be within 1-" + HEIGHT);
-                    newTurn(); // Check if the input is within the grid
-                }
-            } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
-                System.out.println("Invalid input. Please enter a number or 'next'.");
-                newTurn(); // Start a new turn
-            }
+            y = parseInt(input, y);
             x--; // Convert the coordinates to array indices
             y--;
             cells[y][x].state = !cells[y][x].state; // Toggle the cell's state
             newTurn(); // Start a new turn
         }
     }
+
+    private static int parseInt(String[] input, int coord) {
+        try { // Try to parse the input as an integer
+            coord = Integer.parseInt(input[0]);
+            if (coord > GRID_SIZE || coord < 1) { // Check if the input is within the grid
+                System.out.println("Coordinate must be within 1-" + GRID_SIZE);
+                newTurn(); // Start a new turn
+            }
+        } catch (NumberFormatException notInt) { // If it fails, check if the input is "next"
+            System.out.println("Invalid input. Please enter a number or 'next (optional number of turns)'.");
+            newTurn(); // Start a new turn
+        }
+        return coord;
+    }
+
     public static void runTurns(int turns){
         for(int i = 0; i < turns; i++){
             update();
