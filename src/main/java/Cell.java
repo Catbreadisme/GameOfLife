@@ -18,14 +18,12 @@ public class Cell {
     public boolean state; // State of the cell (true = alive, false = dead)
     public boolean newState; // State of the cell in the next turn
     public Game game; // Reference to the game object
-    private String debug; // Debug string
 
     public Cell(int x, int y, Game game) { // Constructor
         this.X = x;
         this.Y = y;
         this.state = false; // Default state is dead
         this.game = game;
-        debug = x + "," + y;
     }
     public void update() { // Update the cell
         /*
@@ -36,17 +34,55 @@ public class Cell {
          */
         int count = 0; // Number of live neighbors
 
-        if(cells[Y][X].state) System.out.println(Y + " " + X);
-
-        if(state) { // Cell is alive
-            if (count < 2 || count > 3) { // Cell death (case 1 and 3)
-                newState = false;
-                debug += "dies";
-            }   // If cell survives, no need to change state (case 2)
-        } else { // Cell is dead
-            if(count == 3) newState = true; // Cell reproduction (case 4)
+        // count the number of live neighbors
+        if(Y > 0 && X > 0) { // Top left
+            if(cells[Y - 1][X - 1].state) {
+                count++;
+            }
         }
-        //System.out.println(debug);
+        if(X > 0) { // Top
+            if(cells[Y][X - 1].state) {
+                count++;
+            }
+        }
+        if(Y < GRID_SIZE - 2 && X > 0) { // Top right
+            if(cells[Y + 1][X - 1].state) {
+                count++;
+            }
+        }
+        if(Y > 0) { // Left
+            if(cells[Y - 1][X].state) {
+                count++;
+            }
+        }
+        if(Y < GRID_SIZE - 2) { // Right
+            if(cells[Y + 1][X].state) {
+                count++;
+            }
+        }
+        if(Y > 0 && X < GRID_SIZE - 2) { // Bottom left
+            if(cells[Y - 1][X + 1].state) {
+                count++;
+            }
+        }
+        if(X < GRID_SIZE - 2) { // Bottom
+            if(cells[Y][X + 1].state) {
+                count++;
+            }
+        }
+        if(Y < GRID_SIZE - 2 && X < GRID_SIZE - 2) { // Bottom right
+            if(cells[Y + 1][X + 1].state) {
+                count++;
+            }
+        }
+        // update newState based on game of life rules
+        if(state) { // Cell is alive
+            // Underpopulation or overpopulation
+            newState = count >= 2 && count <= 3;
+        } else { // Cell is dead
+            // Reproduction
+            newState = count == 3;
+        }
     }
     public char render(){ // Render the cell
         if(state) { // Cell is alive

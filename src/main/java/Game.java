@@ -27,7 +27,7 @@ public class Game {
         cells = new Cell[GRID_SIZE][GRID_SIZE]; // Initialise the 2D array
         for (int i = 0; i < GRID_SIZE; i++) { // For each row
             for (int j = 0; j < GRID_SIZE; j++) { // For each column
-                cells[i][j] = new Cell(i, j, this); // Create a new cell
+                cells[j][i] = new Cell(i, j, this); // Create a new cell
             }
         }
         newTurn(); // Start first turn
@@ -92,6 +92,10 @@ public class Game {
         for (Cell[] row : cells) { // For each row
             for (Cell cell : row) { // For each column
                 cell.update(); // Update the cell
+            }
+        }
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.state = cell.newState; // Update the cell's state
             }
         }
