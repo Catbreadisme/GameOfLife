@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7b7b96-0e21-4ffd-9995-578d6bfb8bd5" name="Changes" comment="fixed #24!">
+    <list default="true" id="8e7b7b96-0e21-4ffd-9995-578d6bfb8bd5" name="Changes" comment="Added rudimentary automatic mode and repeat checking">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,21 +70,8 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.main.java.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="GameOfLife" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="main.java.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="main.java.Main" />
       <module name="GameOfLife" />
       <extension name="coverage">
@@ -98,8 +86,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.main.java.Main" />
-        <item itemvalue="Application.main.java.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -189,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687128017237</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added rudimentary automatic mode and repeat checking">
+      <created>1687403927027</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1687403927027</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,7 +220,8 @@
     <MESSAGE value="Continued debugging #24" />
     <MESSAGE value="#24: something changed&#10;updated cell initialisation and cell updating" />
     <MESSAGE value="fixed #24!" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed #24!" />
+    <MESSAGE value="Added rudimentary automatic mode and repeat checking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added rudimentary automatic mode and repeat checking" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

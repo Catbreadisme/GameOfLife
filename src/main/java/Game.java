@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Game {
     // Constants
-    public static final int GRID_SIZE = 10; // Size of the grid
+    public static final int GRID_SIZE = 35; // Size of the grid
     private static final int rate = 1; // Rate of updates per second
     // Variables
     public static Cell[][] cells; // 2D array of cells
@@ -110,16 +110,20 @@ public class Game {
     // Automatic mode
     public static void runAuto(int states){
         if(states == 0){
+            //noinspection InfiniteLoopStatement
             while(true){
                 update();
                 render();
+                try{
+                    Thread.sleep(1000 / rate);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("----------");
             }
         } else {
             Cell[][][] gridStates = new Cell[states][GRID_SIZE][GRID_SIZE];
-            for (int i = states - 1; i > 0; i--) {
-                gridStates[i] = gridStates[i - 1];
-            }
+            System.arraycopy(gridStates, 0, gridStates, 1, states - 1);
             gridStates[0] = cells;
             update();
             try {
@@ -129,12 +133,12 @@ public class Game {
             }
             render();
             System.out.println("----------");
-            for (int i = 0; i < states; i++) {
+            /*for (int i = 0; i < states; i++) {
                 if (cells == gridStates[i]) {
                     System.out.println("Grid state repeats after " + states + " turns.");
                     break;
                 }
-            }
+            }*/
         }
     }
     // Update every cell
@@ -152,9 +156,20 @@ public class Game {
     }
     // Render the grid
     public static void render() {
+        //Show numbers along top row
+        System.out.print("   ");
+        for(int i = 1; i <= GRID_SIZE; i++){
+            if(i < 10) System.out.print(0); // Add a 0 before single digit numbers
+            System.out.print(i); // Print the column number
+            System.out.print(" "); // Add a space after the column number
+        }
+        System.out.println();
         for (Cell[] row : cells) { // For each row
+            if(row[0].Y < 9) System.out.print(0); // Add a 0 before single digit numbers
+            System.out.print((row[0].Y + 1)); // Print the row number
+            System.out.print(" "); // Add a space after the row number
             for (Cell cell : row) { // For each column
-                System.out.print(cell.render() + " "); // Print the rendered cell
+                System.out.print(cell.render() + "  "); // Print the rendered cell
             }
             System.out.println(); // Print a new line after each row is complete
         }

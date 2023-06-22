@@ -13,8 +13,8 @@ package main.java;
 import static main.java.Game.*;
 
 public class Cell {
-    private final int X; // X position
-    private final int Y; // Y position
+    public final int X; // X position
+    public final int Y; // Y position
     public boolean state; // State of the cell (true = alive, false = dead)
     public boolean newState; // State of the cell in the next turn
     public Game game; // Reference to the game object
