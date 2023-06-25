@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7b7b96-0e21-4ffd-9995-578d6bfb8bd5" name="Changes" comment="Added rudimentary automatic mode and repeat checking">
+    <list default="true" id="8e7b7b96-0e21-4ffd-9995-578d6bfb8bd5" name="Changes" comment="Rewrote multiple state detection (not working)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,7 +183,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687403927027</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Finished auto mode and added line numbers on render">
+      <created>1687470118762</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1687470118762</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fixed edge collision">
+      <created>1687730651447</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1687730651447</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,7 +234,10 @@
     <MESSAGE value="#24: something changed&#10;updated cell initialisation and cell updating" />
     <MESSAGE value="fixed #24!" />
     <MESSAGE value="Added rudimentary automatic mode and repeat checking" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added rudimentary automatic mode and repeat checking" />
+    <MESSAGE value="Finished auto mode and added line numbers on render" />
+    <MESSAGE value="Fixed edge collision" />
+    <MESSAGE value="Rewrote multiple state detection (not working)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rewrote multiple state detection (not working)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -10,7 +10,9 @@
 
 package main.java;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.lang.System;
 
 public class Game {
     // Constants
@@ -121,24 +123,28 @@ public class Game {
                 }
                 System.out.println("----------");
             }
-        } else {
-            Cell[][][] gridStates = new Cell[states][GRID_SIZE][GRID_SIZE];
-            System.arraycopy(gridStates, 0, gridStates, 1, states - 1);
-            gridStates[0] = cells;
-            update();
-            try {
-                Thread.sleep(1000 / rate);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            render();
-            System.out.println("----------");
-            /*for (int i = 0; i < states; i++) {
-                if (cells == gridStates[i]) {
-                    System.out.println("Grid state repeats after " + states + " turns.");
-                    break;
+        } else { // compare current grid to states number of previous states
+            Cell[][][] previousStates = new Cell[states][GRID_SIZE][GRID_SIZE];
+            boolean repeating = false;
+            while( !repeating ) {
+                System.arraycopy(previousStates, 0, previousStates, 1, states - 1);
+                previousStates[0] = cells;
+                update();
+                render();
+                System.out.println("----------");
+                try {
+                    Thread.sleep(1000 / rate);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            }*/
+                for (Cell[][] state : previousStates) {
+                    if (Arrays.deepEquals(state, cells)) {
+                        repeating = true;
+                        System.out.println("Grid repeated after " + states + " turns.");
+                        break;
+                    }
+                }
+            }
         }
     }
     // Update every cell
