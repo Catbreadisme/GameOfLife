@@ -45,7 +45,7 @@ public class Cell {
                 count++;
             }
         }
-        if(Y < GRID_SIZE - 2 && X > 0) { // Top right
+        if(Y < GRID_SIZE - 1 && X > 0) { // Top right
             if(cells[Y + 1][X - 1].state) {
                 count++;
             }
@@ -55,22 +55,22 @@ public class Cell {
                 count++;
             }
         }
-        if(Y < GRID_SIZE - 2) { // Right
+        if(Y < GRID_SIZE - 1) { // Right
             if(cells[Y + 1][X].state) {
                 count++;
             }
         }
-        if(Y > 0 && X < GRID_SIZE - 2) { // Bottom left
+        if(Y > 0 && X < GRID_SIZE - 1) { // Bottom left
             if(cells[Y - 1][X + 1].state) {
                 count++;
             }
         }
-        if(X < GRID_SIZE - 2) { // Bottom
+        if(X < GRID_SIZE - 1) { // Bottom
             if(cells[Y][X + 1].state) {
                 count++;
             }
         }
-        if(Y < GRID_SIZE - 2 && X < GRID_SIZE - 2) { // Bottom right
+        if(Y < GRID_SIZE - 1 && X < GRID_SIZE - 1) { // Bottom right
             if(cells[Y + 1][X + 1].state) {
                 count++;
             }
