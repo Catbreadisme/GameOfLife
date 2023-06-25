@@ -97,11 +97,7 @@ public class Game {
     public static void runTurns(int turns){
         for(int i = 0; i < turns; i++){
             update();
-            try{
-                Thread.sleep(1000 / rate);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            turnPause();
             if(i+1 < turns) {
                 render();
                 System.out.println("----------"); // buffer between multiple turns
@@ -116,14 +112,10 @@ public class Game {
             while(true){
                 update();
                 render();
-                try{
-                    Thread.sleep(1000 / rate);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                turnPause();
                 System.out.println("----------");
             }
-        } else { // compare current grid to states number of previous states
+        } else { // compare current grid to the states number of previous states
             Cell[][][] previousStates = new Cell[states][GRID_SIZE][GRID_SIZE];
             boolean repeating = false;
             while( !repeating ) {
@@ -132,11 +124,7 @@ public class Game {
                 update();
                 render();
                 System.out.println("----------");
-                try {
-                    Thread.sleep(1000 / rate);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                turnPause();
                 for (Cell[][] state : previousStates) {
                     if (Arrays.deepEquals(state, cells)) {
                         repeating = true;
@@ -178,6 +166,15 @@ public class Game {
                 System.out.print(cell.render() + "  "); // Print the rendered cell
             }
             System.out.println(); // Print a new line after each row is complete
+        }
+    }
+
+    // Pause between turns
+    private static void turnPause(){
+        try {
+            Thread.sleep(1000 / rate);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
