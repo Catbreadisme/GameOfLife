@@ -8,7 +8,7 @@
  * This class starts the program
  */
 
-package main.java;
+package main.java.com.skysourced.gameoflife;
 
 public class Main {
     public static void main(String[] args) {

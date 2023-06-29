@@ -8,7 +8,7 @@
  * This class handles all game events and displays the full grid.
  */
 
-package main.java;
+package main.java.com.skysourced.gameoflife;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -172,7 +172,7 @@ public class Game {
     // Pause between turns
     private static void turnPause(){
         try {
-            Thread.sleep(1000 / rate);
+            Thread.sleep(1000 / rate); // Pause for 1/rate seconds
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

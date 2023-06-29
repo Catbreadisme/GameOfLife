@@ -8,9 +8,9 @@
  * This class represents an individual cell.
  */
 
-package main.java;
+package main.java.com.skysourced.gameoflife;
 
-import static main.java.Game.*;
+import static main.java.com.skysourced.gameoflife.Game.*;
 
 public class Cell {
     public final int X; // X position
